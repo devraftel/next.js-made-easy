@@ -2,6 +2,7 @@ import { PostCardProps, PostCard } from '@/components/post-card';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { Modal } from '@/components/modal';
+import { Suspense } from 'react';
 
 const getPost = async ({ id }: { id: string }): Promise<PostCardProps> => {
 	const response = await fetch(`https://dummyjson.com/posts/${id}`, {
@@ -31,12 +32,14 @@ const page = async ({ params }: Props) => {
 				>
 					<ArrowLeft /> All Posts
 				</Link>
-				<div className='my-5'>
-					<PostCard
-						key={post.id}
-						{...post}
-					/>
-				</div>
+				<Suspense fallback={<div>Loading.....</div>}>
+					<div className='my-5'>
+						<PostCard
+							key={post.id}
+							{...post}
+						/>
+					</div>
+				</Suspense>
 			</main>
 		</Modal>
 	);
