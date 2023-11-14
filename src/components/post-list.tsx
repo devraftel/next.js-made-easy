@@ -1,4 +1,3 @@
-import React from 'react';
 import { PostCard, PostCardProps } from './post-card';
 
 const getPosts = async (): Promise<PostCardProps[]> => {
